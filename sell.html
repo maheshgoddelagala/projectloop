@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sell Resource | ProjectLoop</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =========================
+           SELL PAGE
+        ========================= */
+
+        .sell-page {
+            min-height: calc(100vh - 72px);
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(37, 99, 235, 0.08),
+                    transparent 30%
+                ),
+                #f7f9fc;
+
+            padding: 65px 0 90px;
+        }
+
+        .sell-page-container {
+            width: min(1100px, calc(100% - 40px));
+            margin: auto;
+        }
+
+
+        /* =========================
+           PAGE INTRO
+        ========================= */
+
+        .sell-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .sell-intro-label {
+            display: inline-block;
+
+            color: #2563eb;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 1.6px;
+
+            margin-bottom: 12px;
+        }
+
+        .sell-intro h1 {
+            margin: 0;
+
+            color: #172033;
+
+            font-size: clamp(38px, 5vw, 58px);
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+        }
+
+        .sell-intro h1 span {
+            color: #2563eb;
+        }
+
+        .sell-intro p {
+            margin-top: 16px;
+
+            color: #667085;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FORM CARD
+        ========================= */
+
+        .sell-form-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 24px;
+
+            padding: 38px;
+
+            box-shadow:
+                0 18px 50px rgba(15, 23, 42, 0.07);
+        }
+
+
+        /* =========================
+           FORM HEADER
+        ========================= */
+
+        .form-header {
+            padding-bottom: 25px;
+
+            border-bottom: 1px solid #eef1f6;
+
+            margin-bottom: 28px;
+        }
+
+        .form-header h2 {
+            margin: 0;
+
+            color: #172033;
+
+            font-size: 22px;
+        }
+
+        .form-header p {
+            margin-top: 7px;
+
+            color: #667085;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           FORM GRID
+        ========================= */
+
+        .sell-form {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #344054;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .form-group label span {
+            color: #ef4444;
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            box-sizing: border-box;
+
+            border: 1px solid #d9dee8;
+
+            border-radius: 11px;
+
+            background: white;
+
+            color: #172033;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        .form-group input,
+        .form-group select {
+            height: 50px;
+
+            padding: 0 14px;
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+
+            padding: 14px;
+
+            resize: vertical;
+
+            line-height: 1.5;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        /* =========================
+           PRICE
+        ========================= */
+
+        .price-input {
+            position: relative;
+        }
+
+        .price-symbol {
+            position: absolute;
+
+            left: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #667085;
+
+            font-weight: 600;
+        }
+
+        .price-input input {
+            padding-left: 32px;
+        }
+
+
+        /* =========================
+           IMAGE UPLOAD
+        ========================= */
+
+        .image-upload {
+            grid-column: 1 / -1;
+        }
+
+        .upload-box {
+            border: 2px dashed #cfd8e8;
+
+            border-radius: 16px;
+
+            min-height: 170px;
+
+            background: #f9fbff;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .upload-box:hover {
+            border-color: #2563eb;
+
+            background: #f3f7ff;
+        }
+
+        .upload-icon {
+            width: 52px;
+            height: 52px;
+
+            border-radius: 14px;
+
+            background: #eaf1ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 23px;
+
+            margin-bottom: 10px;
+        }
+
+        .upload-box strong {
+            color: #344054;
+
+            font-size: 14px;
+        }
+
+        .upload-box span {
+            margin-top: 5px;
+
+            color: #98a2b3;
+
+            font-size: 12px;
+        }
+
+        .upload-box input {
+            display: none;
+        }
+
+
+        /* =========================
+           TIPS
+        ========================= */
+
+        .sell-tip {
+            grid-column: 1 / -1;
+
+            display: flex;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: #f0f6ff;
+
+            border: 1px solid #dce9ff;
+        }
+
+        .tip-icon {
+            width: 30px;
+            height: 30px;
+
+            flex-shrink: 0;
+
+            border-radius: 8px;
+
+            background: #dce9ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+        }
+
+        .sell-tip strong {
+            display: block;
+
+            color: #344054;
+
+            font-size: 12px;
+        }
+
+        .sell-tip p {
+            margin-top: 4px;
+
+            color: #667085;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .form-actions {
+            grid-column: 1 / -1;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            padding-top: 8px;
+        }
+
+        .cancel-button {
+            height: 50px;
+
+            padding: 0 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 1px solid #d9dee8;
+
+            border-radius: 10px;
+
+            background: white;
+
+            color: #475467;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        .post-button {
+            height: 50px;
+
+            padding: 0 25px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .post-button:hover {
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           TRUST MESSAGE
+        ========================= */
+
+        .sell-trust {
+            text-align: center;
+
+            margin-top: 24px;
+
+            color: #98a2b3;
+
+            font-size: 12px;
+        }
+
+        .sell-trust strong {
+            color: #667085;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            .sell-page {
+                padding-top: 40px;
+            }
+
+            .sell-form-card {
+                padding: 25px;
+            }
+
+            .sell-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width,
+            .image-upload,
+            .sell-tip,
+            .form-actions {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .cancel-button,
+            .post-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .sell-page-container {
+                width: calc(100% - 24px);
+            }
+
+            .sell-form-card {
+                padding: 20px;
+            }
+
+            .sell-intro h1 {
+                font-size: 38px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            <span>Project</span>Loop
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse
+            </a>
+
+            <a href="sell.html" class="active">
+                Sell
+            </a>
+
+            <a href="chat.html">
+                Messages
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </nav>
+
+
+        <a href="verification.html" class="nav-button">
+            Verify Student
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     SELL PAGE
+========================= -->
+
+<main class="sell-page">
+
+    <div class="sell-page-container">
+
+
+        <!-- INTRO -->
+
+        <section class="sell-intro">
+
+            <div class="sell-intro-label">
+                SHARE & EARN
+            </div>
+
+            <h1>
+                List Your <span>Resource</span>
+            </h1>
+
+            <p>
+                Give your unused project components a second life
+                and help another student complete their project.
+            </p>
+
+        </section>
+
+
+
+        <!-- FORM -->
+
+        <section class="sell-form-card">
+
+
+            <div class="form-header">
+
+                <h2>
+                    Create a Listing
+                </h2>
+
+                <p>
+                    Add accurate details so students can easily find your resource.
+                </p>
+
+            </div>
+
+
+
+            <form class="sell-form" id="sellForm">
+
+
+                <!-- ITEM NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        Item Name <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="itemName"
+                        placeholder="e.g. Arduino UNO R3"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Category <span>*</span>
+                    </label>
+
+                    <select id="itemCategory" required>
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option>
+                            Components
+                        </option>
+
+                        <option>
+                            Tools
+                        </option>
+
+                        <option>
+                            Materials
+                        </option>
+
+                        <option>
+                            Electronics
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- CONDITION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Condition <span>*</span>
+                    </label>
+
+                    <select required>
+
+                        <option>
+                            New
+                        </option>
+
+                        <option>
+                            Like New
+                        </option>
+
+                        <option>
+                            Good
+                        </option>
+
+                        <option>
+                            Used
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PRICE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Price <span>*</span>
+                    </label>
+
+                    <div class="price-input">
+
+                        <span class="price-symbol">
+                            ₹
+                        </span>
+
+                        <input
+                            type="number"
+                            placeholder="Enter price"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AVAILABILITY -->
+
+                <div class="form-group">
+
+                    <label>
+                        Availability <span>*</span>
+                    </label>
+
+                    <select required>
+
+                        <option>
+                            Available
+                        </option>
+
+                        <option>
+                            Currently Rented
+                        </option>
+
+                        <option>
+                            Sold
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- TYPE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Listing Type
+                    </label>
+
+                    <select>
+
+                        <option>
+                            Buy
+                        </option>
+
+                        <option>
+                            Rent
+                        </option>
+
+                        <option>
+                            Exchange
+                        </option>
+
+                        <option>
+                            Buy / Rent
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group full-width">
+
+                    <label>
+                        Compatibility / Details <span>*</span>
+                    </label>
+
+                    <textarea
+                        id="itemDetails"
+                        placeholder="Describe the item, condition, specifications and what projects it is suitable for..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- IMAGE UPLOAD -->
+
+                <div class="form-group image-upload">
+
+                    <label>
+                        Product Image
+                    </label>
+
+
+                    <label class="upload-box">
+
+                        <div class="upload-icon">
+                            📷
+                        </div>
+
+                        <strong>
+                            Click to upload an image
+                        </strong>
+
+                        <span>
+                            JPG or PNG · Recommended 1:1 ratio
+                        </span>
+
+                        <input
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            id="itemImage"
+                        >
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- TIP -->
+
+                <div class="sell-tip">
+
+                    <div class="tip-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Listing tip
+                        </strong>
+
+                        <p>
+                            Use a clear photo and mention compatibility,
+                            working condition and any important details.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="browse.html"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="post-button"
+                    >
+                        Post Listing →
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <div class="sell-trust">
+            🔒 <strong>Verified students only.</strong>
+            Your listing will be visible to the ProjectLoop campus community.
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>

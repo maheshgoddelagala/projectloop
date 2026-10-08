@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Browse Resources | ProjectLoop</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =========================
+           BROWSE PAGE
+        ========================= */
+
+        .browse-page {
+            min-height: 100vh;
+            background: #f7f9fc;
+            padding: 60px 0 80px;
+        }
+
+        .browse-container {
+            width: min(1180px, calc(100% - 40px));
+            margin: auto;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .browse-hero {
+            padding-bottom: 30px;
+        }
+
+        .browse-label {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .browse-hero h1 {
+            margin: 0;
+            color: #172033;
+            font-size: clamp(38px, 5vw, 56px);
+            letter-spacing: -2px;
+        }
+
+        .browse-hero p {
+            color: #667085;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+
+        /* =========================
+           SEARCH BOX
+        ========================= */
+
+        .browse-search-area {
+            background: white;
+            padding: 18px;
+            border-radius: 20px;
+            margin-top: 30px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
+        }
+
+        .browse-search {
+            width: 100%;
+            height: 54px;
+            box-sizing: border-box;
+
+            border: 1px solid #d9dee8;
+            border-radius: 12px;
+
+            padding: 0 18px;
+
+            font-size: 16px;
+            outline: none;
+        }
+
+        .browse-search:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .browse-filters {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .browse-filters select {
+            height: 46px;
+
+            border: 1px solid #d9dee8;
+            border-radius: 10px;
+
+            background: white;
+
+            padding: 0 12px;
+
+            color: #344054;
+            font-size: 14px;
+
+            outline: none;
+        }
+
+        .browse-filters select:focus {
+            border-color: #2563eb;
+        }
+
+
+        /* =========================
+           RESULTS
+        ========================= */
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            margin: 50px 0 24px;
+        }
+
+        .results-header h2 {
+            margin: 0;
+            color: #172033;
+            font-size: 29px;
+        }
+
+        .results-count {
+            color: #667085;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           PRODUCT GRID
+        ========================= */
+
+        .browse-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+
+        /* =========================
+           PRODUCT CARD
+        ========================= */
+
+        .browse-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow: 0 6px 22px rgba(15, 23, 42, 0.04);
+
+            transition: 0.25s ease;
+        }
+
+        .browse-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
+
+            border-color: #d4defa;
+        }
+
+
+        /* =========================
+           PRODUCT IMAGE
+        ========================= */
+
+        .product-image {
+            width: 100%;
+            height: 210px;
+
+            background: #f8fafc;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            padding: 15px;
+            box-sizing: border-box;
+
+            transition: 0.3s ease;
+        }
+
+        .browse-card:hover .product-image img {
+            transform: scale(1.07);
+        }
+
+
+        /* =========================
+           PRODUCT CONTENT
+        ========================= */
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-condition {
+            color: #16a34a;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        .product-content h3 {
+            margin: 0;
+
+            color: #172033;
+
+            font-size: 18px;
+            line-height: 1.3;
+        }
+
+        .product-description {
+            color: #667085;
+
+            font-size: 14px;
+            line-height: 1.5;
+
+            min-height: 42px;
+
+            margin: 9px 0 15px;
+        }
+
+
+        /* =========================
+           PRICE
+        ========================= */
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            color: #172033;
+
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .availability {
+            color: #16a34a;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .view-button {
+            display: block;
+
+            margin-top: 15px;
+
+            text-align: center;
+            text-decoration: none;
+
+            background: #2563eb;
+            color: white;
+
+            padding: 11px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .view-button:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =========================
+           VERIFIED
+        ========================= */
+
+        .verified {
+            margin-top: 11px;
+
+            color: #2563eb;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1050px) {
+
+            .browse-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .browse-filters {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            .browse-container {
+                width: calc(100% - 24px);
+            }
+
+            .browse-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .browse-filters {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .results-header {
+                display: block;
+            }
+
+            .results-count {
+                display: block;
+                margin-top: 7px;
+            }
+
+        }
+
+
+        @media (max-width: 520px) {
+
+            .browse-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .browse-filters {
+                grid-template-columns: 1fr;
+            }
+
+            .browse-hero h1 {
+                font-size: 38px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            <span>Project</span>Loop
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html" class="active">
+                Browse
+            </a>
+
+            <a href="sell.html">
+                Sell
+            </a>
+
+            <a href="chat.html">
+                Messages
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </nav>
+
+
+        <a href="verification.html" class="nav-button">
+            Verify Student
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="browse-page">
+
+<div class="browse-container">
+
+
+<!-- HERO -->
+
+<section class="browse-hero">
+
+    <div class="browse-label">
+        CAMPUS MARKETPLACE
+    </div>
+
+
+    <h1>
+        Find Project Resources
+    </h1>
+
+
+    <p>
+        Discover affordable project components, tools and materials from verified students.
+    </p>
+
+
+    <!-- SEARCH -->
+
+    <div class="browse-search-area">
+
+        <input
+            type="text"
+            id="browseSearch"
+            class="browse-search"
+            placeholder="🔍 Search Arduino, sensors, tools, materials..."
+        >
+
+
+        <!-- FILTERS -->
+
+        <div class="browse-filters">
+
+            <select>
+
+                <option>
+                    All Categories
+                </option>
+
+                <option>
+                    Components
+                </option>
+
+                <option>
+                    Tools
+                </option>
+
+                <option>
+                    Materials
+                </option>
+
+                <option>
+                    Electronics
+                </option>
+
+            </select>
+
+
+            <select>
+
+                <option>
+                    Any Price
+                </option>
+
+                <option>
+                    Under ₹100
+                </option>
+
+                <option>
+                    ₹100 - ₹500
+                </option>
+
+                <option>
+                    ₹500+
+                </option>
+
+            </select>
+
+
+            <select>
+
+                <option>
+                    Any Condition
+                </option>
+
+                <option>
+                    New
+                </option>
+
+                <option>
+                    Like New
+                </option>
+
+                <option>
+                    Good
+                </option>
+
+            </select>
+
+
+            <select>
+
+                <option>
+                    Availability
+                </option>
+
+                <option>
+                    Available
+                </option>
+
+                <option>
+                    Rented
+                </option>
+
+            </select>
+
+
+            <select>
+
+                <option>
+                    Buy / Rent
+                </option>
+
+                <option>
+                    Buy
+                </option>
+
+                <option>
+                    Rent
+                </option>
+
+                <option>
+                    Exchange
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- RESULTS -->
+
+<section>
+
+
+<div class="results-header">
+
+    <div>
+
+        <h2>
+            Available Resources
+        </h2>
+
+        <span class="results-count">
+            5 resources found
+        </span>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     PRODUCT GRID
+========================= -->
+
+<div class="browse-grid">
+
+
+
+<!-- PRODUCT 1 -->
+
+<div class="browse-card">
+
+    <div class="product-image">
+
+        <img
+            src="images/arduino-uno.jpg"
+            alt="Arduino UNO R3"
+        >
+
+    </div>
+
+
+    <div class="product-content">
+
+        <div class="product-condition">
+            ● Used · Good
+        </div>
+
+
+        <h3>
+            Arduino UNO R3
+        </h3>
+
+
+        <p class="product-description">
+            Microcontroller board for Arduino and electronics projects.
+        </p>
+
+
+        <div class="product-bottom">
+
+            <span class="product-price">
+                ₹450
+            </span>
+
+            <span class="availability">
+                ● Available
+            </span>
+
+        </div>
+
+
+        <a href="item.html" class="view-button">
+            View Details →
+        </a>
+
+
+        <div class="verified">
+            ✓ Verified Student
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- PRODUCT 2 -->
+
+<div class="browse-card">
+
+    <div class="product-image">
+
+        <img
+            src="images/ultrasonic-sensor.jpg"
+            alt="HC-SR04 Ultrasonic Sensor"
+        >
+
+    </div>
+
+
+    <div class="product-content">
+
+        <div class="product-condition">
+            ● Used · Good
+        </div>
+
+
+        <h3>
+            HC-SR04 Ultrasonic Sensor
+        </h3>
+
+
+        <p class="product-description">
+            Distance measurement sensor for robotics projects.
+        </p>
+
+
+        <div class="product-bottom">
+
+            <span class="product-price">
+                ₹80
+            </span>
+
+            <span class="availability">
+                ● Available
+            </span>
+
+        </div>
+
+
+        <a href="item.html" class="view-button">
+            View Details →
+        </a>
+
+
+        <div class="verified">
+            ✓ Verified Student
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- PRODUCT 3 -->
+
+<div class="browse-card">
+
+    <div class="product-image">
+
+        <img
+            src="images/breadboard.jpg"
+            alt="830 Point Breadboard"
+        >
+
+    </div>
+
+
+    <div class="product-content">
+
+        <div class="product-condition">
+            ● Like New
+        </div>
+
+
+        <h3>
+            830 Point Breadboard
+        </h3>
+
+
+        <p class="product-description">
+            Solderless prototyping board for quick circuit building.
+        </p>
+
+
+        <div class="product-bottom">
+
+            <span class="product-price">
+                ₹100
+            </span>
+
+            <span class="availability">
+                ● Available
+            </span>
+
+        </div>
+
+
+        <a href="item.html" class="view-button">
+            View Details →
+        </a>
+
+
+        <div class="verified">
+            ✓ Verified Student
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- PRODUCT 4 -->
+
+<div class="browse-card">
+
+    <div class="product-image">
+
+        <img
+            src="images/jumper-wires.jpg"
+            alt="Jumper Wires"
+        >
+
+    </div>
+
+
+    <div class="product-content">
+
+        <div class="product-condition">
+            ● Used · Good
+        </div>
+
+
+        <h3>
+            Jumper Wire Set
+        </h3>
+
+
+        <p class="product-description">
+            Male-to-male jumper wires for breadboard connections.
+        </p>
+
+
+        <div class="product-bottom">
+
+            <span class="product-price">
+                ₹50
+            </span>
+
+            <span class="availability">
+                ● Available
+            </span>
+
+        </div>
+
+
+        <a href="item.html" class="view-button">
+            View Details →
+        </a>
+
+
+        <div class="verified">
+            ✓ Verified Student
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- PRODUCT 5 -->
+
+<div class="browse-card">
+
+    <div class="product-image">
+
+        <img
+            src="images/servo-motor.jpg"
+            alt="SG90 Servo Motor"
+        >
+
+    </div>
+
+
+    <div class="product-content">
+
+        <div class="product-condition">
+            ● Like New
+        </div>
+
+
+        <h3>
+            SG90 Servo Motor
+        </h3>
+
+
+        <p class="product-description">
+            Compact servo motor for robotics and automation projects.
+        </p>
+
+
+        <div class="product-bottom">
+
+            <span class="product-price">
+                ₹120
+            </span>
+
+            <span class="availability">
+                ● Available
+            </span>
+
+        </div>
+
+
+        <a href="item.html" class="view-button">
+            View Details →
+        </a>
+
+
+        <div class="verified">
+            ✓ Verified Student
+        </div>
+
+    </div>
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>

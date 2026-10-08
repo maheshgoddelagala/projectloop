@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | ProjectLoop</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =========================
+           PROFILE PAGE
+        ========================= */
+
+        .profile-page {
+            min-height: calc(100vh - 72px);
+
+            background:
+                radial-gradient(
+                    circle at 85% 10%,
+                    rgba(37, 99, 235, 0.08),
+                    transparent 30%
+                ),
+                #f7f9fc;
+
+            padding: 50px 0 90px;
+        }
+
+
+        .profile-container {
+            width: min(1100px, calc(100% - 40px));
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           PROFILE HEADER
+        ========================= */
+
+        .profile-header {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 22px;
+
+            padding: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            box-shadow:
+                0 12px 35px rgba(15, 23, 42, 0.06);
+        }
+
+
+        .profile-user {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f7ff0
+                );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 32px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 25px rgba(37, 99, 235, 0.20);
+        }
+
+
+        .profile-info h1 {
+            margin: 0;
+
+            color: #172033;
+
+            font-size: 30px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .profile-college {
+            margin-top: 6px;
+
+            color: #667085;
+
+            font-size: 14px;
+        }
+
+
+        .verified-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 12px;
+
+            padding: 7px 11px;
+
+            border-radius: 8px;
+
+            background: #eaf8ef;
+
+            color: #16a34a;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        .profile-actions {
+            display: flex;
+
+            gap: 10px;
+        }
+
+
+        .profile-action {
+            padding: 11px 17px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .edit-profile {
+            background: #2563eb;
+
+            color: white;
+        }
+
+
+        .edit-profile:hover {
+            background: #1d4ed8;
+        }
+
+
+        .list-resource {
+            border: 1px solid #d9dee8;
+
+            background: white;
+
+            color: #344054;
+        }
+
+
+        .list-resource:hover {
+            border-color: #2563eb;
+
+            color: #2563eb;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .profile-stats {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-top: 20px;
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            text-align: center;
+
+            box-shadow:
+                0 6px 20px rgba(15, 23, 42, 0.04);
+        }
+
+
+        .stat-number {
+
+            display: block;
+
+            color: #172033;
+
+            font-size: 26px;
+
+            font-weight: 800;
+        }
+
+
+        .stat-label {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #98a2b3;
+
+            font-size: 12px;
+        }
+
+
+        .stat-rating {
+
+            color: #f59e0b;
+        }
+
+
+        /* =========================
+           ACTIVITY
+        ========================= */
+
+        .activity-section {
+
+            margin-top: 35px;
+        }
+
+
+        .activity-heading {
+
+            display: flex;
+
+            align-items: end;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+
+        .activity-heading span {
+
+            color: #2563eb;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .activity-heading h2 {
+
+            margin-top: 7px;
+
+            color: #172033;
+
+            font-size: 28px;
+
+            letter-spacing: -0.8px;
+        }
+
+
+        /* =========================
+           TABS
+        ========================= */
+
+        .profile-tabs {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            padding: 6px;
+
+            display: flex;
+
+            gap: 5px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .profile-tab {
+
+            flex: 1;
+
+            border: none;
+
+            background: transparent;
+
+            color: #667085;
+
+            padding: 12px 15px;
+
+            border-radius: 9px;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .profile-tab:hover {
+
+            color: #2563eb;
+
+            background: #f5f8ff;
+        }
+
+
+        .profile-tab.active {
+
+            background: #2563eb;
+
+            color: white;
+        }
+
+
+        /* =========================
+           LISTINGS GRID
+        ========================= */
+
+        .profile-listings {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .profile-item {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            transition: 0.25s;
+        }
+
+
+        .profile-item:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 14px 30px rgba(15, 23, 42, 0.08);
+        }
+
+
+        .profile-item-image {
+
+            height: 170px;
+
+            background: #f8fafc;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+
+        .profile-item-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            padding: 12px;
+
+            box-sizing: border-box;
+
+            transition: 0.3s;
+        }
+
+
+        .profile-item:hover .profile-item-image img {
+
+            transform: scale(1.05);
+        }
+
+
+        .profile-item-content {
+
+            padding: 17px;
+        }
+
+
+        .item-condition {
+
+            color: #16a34a;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+
+        .profile-item h3 {
+
+            margin-top: 7px;
+
+            color: #172033;
+
+            font-size: 16px;
+        }
+
+
+        .profile-item-description {
+
+            margin-top: 5px;
+
+            color: #667085;
+
+            font-size: 12px;
+        }
+
+
+        .profile-item-footer {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: 14px;
+        }
+
+
+        .profile-item-price {
+
+            color: #172033;
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+
+        .profile-item-status {
+
+            color: #16a34a;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty-state {
+
+            display: none;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 18px;
+
+            padding: 60px 20px;
+
+            text-align: center;
+        }
+
+
+        .empty-icon {
+
+            width: 55px;
+            height: 55px;
+
+            border-radius: 15px;
+
+            background: #eff5ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: auto;
+
+            font-size: 23px;
+        }
+
+
+        .empty-state h3 {
+
+            margin-top: 15px;
+
+            color: #172033;
+
+            font-size: 18px;
+        }
+
+
+        .empty-state p {
+
+            margin-top: 7px;
+
+            color: #98a2b3;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .profile-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .profile-actions {
+
+                width: 100%;
+            }
+
+
+            .profile-action {
+
+                flex: 1;
+
+                text-align: center;
+            }
+
+
+            .profile-listings {
+
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .profile-page {
+
+                padding-top: 25px;
+            }
+
+
+            .profile-container {
+
+                width: calc(100% - 24px);
+            }
+
+
+            .profile-header {
+
+                padding: 22px;
+            }
+
+
+            .profile-user {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .profile-stats {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .profile-tabs {
+
+                overflow-x: auto;
+            }
+
+
+            .profile-tab {
+
+                min-width: 110px;
+            }
+
+
+            .profile-listings {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            <span>Project</span>Loop
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse
+            </a>
+
+            <a href="sell.html">
+                Sell
+            </a>
+
+            <a href="chat.html">
+                Messages
+            </a>
+
+            <a href="profile.html" class="active">
+                Profile
+            </a>
+
+        </nav>
+
+
+        <a href="verification.html" class="nav-button">
+            Verify Student
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     PROFILE PAGE
+========================= -->
+
+<main class="profile-page">
+
+    <div class="profile-container">
+
+
+        <!-- PROFILE HEADER -->
+
+        <section class="profile-header">
+
+
+            <div class="profile-user">
+
+
+                <div class="profile-avatar">
+                    M
+                </div>
+
+
+                <div class="profile-info">
+
+                    <h1>
+                        Mahesh
+                    </h1>
+
+                    <p class="profile-college">
+                        VIT-AP · Integrated M.Tech Software Engineering
+                    </p>
+
+
+                    <div class="verified-badge">
+                        ✓ Verified Student
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-actions">
+
+                <a
+                    href="sell.html"
+                    class="profile-action list-resource"
+                >
+                    + List Resource
+                </a>
+
+
+                <a
+                    href="#"
+                    class="profile-action edit-profile"
+                >
+                    Edit Profile
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- STATS -->
+
+        <section class="profile-stats">
+
+
+            <div class="stat-card">
+
+                <span class="stat-number">
+                    3
+                </span>
+
+                <span class="stat-label">
+                    My Listings
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-number">
+                    5
+                </span>
+
+                <span class="stat-label">
+                    Completed Transactions
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-number stat-rating">
+                    ★ 4.9
+                </span>
+
+                <span class="stat-label">
+                    Student Rating
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ACTIVITY -->
+
+        <section class="activity-section">
+
+
+            <div class="activity-heading">
+
+                <div>
+
+                    <span>
+                        YOUR CAMPUS ACTIVITY
+                    </span>
+
+                    <h2>
+                        My Activity
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TABS -->
+
+            <div class="profile-tabs">
+
+
+                <button
+                    class="profile-tab active"
+                    data-tab="listings"
+                >
+                    My Listings
+                </button>
+
+
+                <button
+                    class="profile-tab"
+                    data-tab="purchases"
+                >
+                    My Purchases
+                </button>
+
+
+                <button
+                    class="profile-tab"
+                    data-tab="rentals"
+                >
+                    My Rentals
+                </button>
+
+
+                <button
+                    class="profile-tab"
+                    data-tab="exchanges"
+                >
+                    My Exchanges
+                </button>
+
+
+            </div>
+
+
+
+            <!-- LISTINGS -->
+
+            <div
+                class="profile-listings"
+                id="listings"
+            >
+
+
+                <!-- ARDUINO -->
+
+                <div class="profile-item">
+
+                    <div class="profile-item-image">
+
+                        <img
+                            src="images/arduino-uno.jpg"
+                            alt="Arduino UNO R3"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-item-content">
+
+                        <div class="item-condition">
+                            Electronics · Used · Good
+                        </div>
+
+
+                        <h3>
+                            Arduino UNO R3
+                        </h3>
+
+
+                        <p class="profile-item-description">
+                            Microcontroller board
+                        </p>
+
+
+                        <div class="profile-item-footer">
+
+                            <span class="profile-item-price">
+                                ₹450
+                            </span>
+
+                            <span class="profile-item-status">
+                                ● Available
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ULTRASONIC -->
+
+                <div class="profile-item">
+
+                    <div class="profile-item-image">
+
+                        <img
+                            src="images/ultrasonic-sensor.jpg"
+                            alt="Ultrasonic Sensor"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-item-content">
+
+                        <div class="item-condition">
+                            Components · Used · Good
+                        </div>
+
+
+                        <h3>
+                            Ultrasonic Sensor
+                        </h3>
+
+
+                        <p class="profile-item-description">
+                            HC-SR04 distance sensor
+                        </p>
+
+
+                        <div class="profile-item-footer">
+
+                            <span class="profile-item-price">
+                                ₹80
+                            </span>
+
+                            <span class="profile-item-status">
+                                ● Available
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- JUMPER WIRES -->
+
+                <div class="profile-item">
+
+                    <div class="profile-item-image">
+
+                        <img
+                            src="images/jumper-wires.jpg"
+                            alt="Jumper Wires"
+                        >
+
+                    </div>
+
+
+                    <div class="profile-item-content">
+
+                        <div class="item-condition">
+                            Materials · Used · Good
+                        </div>
+
+
+                        <h3>
+                            Jumper Wires
+                        </h3>
+
+
+                        <p class="profile-item-description">
+                            Male-to-male jumper wire set
+                        </p>
+
+
+                        <div class="profile-item-footer">
+
+                            <span class="profile-item-price">
+                                ₹50
+                            </span>
+
+                            <span class="profile-item-status">
+                                ● Available
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                class="empty-state"
+                id="emptyState"
+            >
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Nothing here yet
+                </h3>
+
+                <p>
+                    Your activity will appear here.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     PROFILE JAVASCRIPT
+========================= -->
+
+<script>
+
+    const tabs =
+        document.querySelectorAll(".profile-tab");
+
+    const listings =
+        document.getElementById("listings");
+
+    const emptyState =
+        document.getElementById("emptyState");
+
+
+    tabs.forEach(function(tab) {
+
+        tab.addEventListener("click", function() {
+
+
+            tabs.forEach(function(item) {
+
+                item.classList.remove("active");
+
+            });
+
+
+            tab.classList.add("active");
+
+
+            const selectedTab =
+                tab.getAttribute("data-tab");
+
+
+            if (selectedTab === "listings") {
+
+                listings.style.display = "grid";
+
+                emptyState.style.display = "none";
+
+            }
+
+            else {
+
+                listings.style.display = "none";
+
+                emptyState.style.display = "block";
+
+            }
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
